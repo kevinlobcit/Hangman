@@ -15,6 +15,20 @@ def pickword(dicarray):
 def spotreplace(letter, censored, index):
     return censored[:index] + letter + censored[index+1:]
     
+def search(letter, word):
+    print("searching")
+    positions = []
+    for i in range(len(word)):
+        if(word[i] == letter):
+            print("match at ", i)
+            positions.append(i)
+    return positions
+
+def checkreplace(letter, word, censored):
+    positions = search(letter, word)
+    for i in range(len(positions)):
+        censored = spotreplace(letter, censored, positions[i])
+        print(censored)
 
 #save the words in an array 
 dictionary = []
@@ -22,11 +36,18 @@ loadworddic(dictionary)
 
 #pick a word from the array
 word = pickword(dictionary)
-word = "abcdefg"
+word = "abcadefga"
 
+#create censored word
 censored = '_'*len(word)
 
 print(word)
 print(censored)
-
 print(spotreplace("x", censored, 1))
+
+letter = "a"
+checkreplace(letter, word, censored)
+#positions = search(letter, word)
+#for i in range(len(positions)):
+#    censored = spotreplace(letter, censored, positions[i])
+#    print(censored)
